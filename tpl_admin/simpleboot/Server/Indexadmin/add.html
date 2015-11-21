@@ -1,0 +1,103 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed">
+	<div class="wrap jj">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('Indexadmin/index')}">服务器</a></li>
+			<li><a href="{:U('Indexadmin/add')}">添加服务器</a></li>
+		</ul>
+		<div class="common-form">
+			<form method="post" class="form-horizontal J_ajaxForm" action="{:U('Indexadmin/'.$type)}">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">服务器名称:</label>
+						<div class="controls">
+							<input type="text" class="input" name="name" value="{$name}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">唯一标识:</label>
+						<div class="controls">
+							<input type="text" class="input" name="sign" value="{$sign}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">初始端口:</label>
+						<div class="controls">
+							<input type="text" class="input" name="startport" value="{$startport}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">转发域名:</label>
+						<div class="controls">
+							<input type="text" class="input" name="domain" value="{$domain}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">IP:</label>
+						<div class="controls">
+							<input type="text" class="input" name="ip" value="{$ip}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">加密方式:</label>
+						<div class="controls">
+							<select name="enctyption_mode">
+							<foreach name="enmodes" item="enmode">
+							<option <if condition="$enctyption_mode eq $enmode">selected</if> >{$enmode}</option>
+							</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">购买地址:</label>
+						<div class="controls">
+							<input type="text" class="input" name="buy_url" value="{$buy_url}">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">服务器描述:</label>
+						<div class="controls">
+							<textarea rows="3" name="descriptions">{$descriptions}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">服务器状态:</label>
+						<div class="controls">
+							<input type="radio" class="radio" <if condition='$status eq 1'>checked</if> name="status" value="1">启用
+							&nbsp;&nbsp;
+							<input type="radio" class="radio" <if condition='$status neq 1'>checked</if> name="status" value="0">禁用
+						</div>
+					</div>
+					<div class="control-group">
+						<input type="hidden" name="sell_A" id="sell_A" value="" />
+						<label class="control-label">流量销售价格:</label>
+						<div class="controls">
+							<span class="label label-info">流量的最小单位为MB,1GB = 1024MB</span>
+							<a class="btn btn-danger btn-mini" title="添加销售值" id="addbyliuliang"><i class="icon icon-plus"></i></a>
+						</div>
+					</div>
+					<div id="price_A_div"></div>
+					<div class="control-group">
+						<input type="hidden" name="sell_B" id="sell_B" value="" />
+						<label class="control-label">时间销售价格:</label>
+						<div class="controls">
+							<span class="label label-info">时间的最小单位为天</span>
+							<a class="btn btn-danger btn-mini" title="添加销售值" id="addbytime"><i class="icon icon-plus"></i></a>
+						</div>
+					</div>
+					<div id="price_B_div"></div>
+				</fieldset>
+				<div class="form-actions">
+					<input type="hidden" name="id" value="{$id}" />
+					<button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">更新</button>
+					<a class="btn" href="__URL__">返回</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+	<script type="text/javascript">var server_sell = eval('{$sever_sells}');</script>
+	<script src="__TMPL__/Server/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$site_name} - 订单{$order_id}</title>
+<meta name="keywords" content="{$site_seo_keywords}" />
+<meta name="description" content="{$site_seo_description}">
+<meta name="author" content="ThinkCMF">
+<tc_include file="Public:head" />
+</head>
+
+<body class="body-white" id="top">
+	<tc_include file="Public:nav" />
+
+		<div class="container tc-main">
+                <div class="row">
+                    <div class="span3">
+	                    <tc_include file="Public:usernav"/>
+                    </div>
+                    <div class="span9">
+                           <div class="tabs">
+                               <ul class="nav nav-tabs">
+                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list"></i> 我的订单</a></li>
+                               </ul>
+                               <div class="tab-content">
+                                   <div class="tab-pane active" id="one">
+                                   		<div>
+                                   			<h3>订单信息</h3>
+                                   			<table class="table table-striped table-bordered">
+                                   				<tr>
+                                   					<td>订单号:</td>
+                                   					<td>{$order_id}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>服务<?php echo $server_sell['sell_mode']=='A'?'流量':'时长'?>:</td>
+							       					<td>
+							       						<?php
+							       							if($server_sell['sell_mode'] =="A"){
+							       								if($server_sell['value']/1024>1){
+							       									echo round(($server_sell['value']/1024),3)." GB";
+							       									echo ',&nbsp;即：';
+							       								}
+							       								echo $server_sell['value']." MB";
+							       							}else{
+							       								if($server_sell['value']/30>1){
+							       									if($server_sell['value']/30/12>1){
+							       										echo round($server_sell['value']/30/12,3)." 年";
+							       									}else{
+							       										echo round($server_sell['value']/30,3)." 月";
+							       									}
+							       									echo ',&nbsp;即：';
+							       								}
+							       								echo $server_sell['value']." 天";
+							       							}
+							       							?>
+							       					</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>下单时间:</td>
+                                   					<td>{$create_time}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>价格:</td>
+                                   					<td>{$price} 元</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>订单状态:</td>
+                                   					<td>
+                                   						<if condition="$status eq 1">
+                                   							未支付
+                                   							 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+                                   						</if>
+									        			<if condition="$status eq 2">已支付</if>
+                                   					</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>支付时间:</td>
+                                   					<td>
+                                   						<if condition="$status eq 1"> - </if>
+									        			<if condition="$status eq 2">{$pay_time}</if>
+                                   					</td>
+                                   				</tr>
+                                   			</table>
+                                   		</div>
+                                   		
+                                   		<div>
+                                   		<h3>服务器信息</h3>
+                                   			<table class="table table-striped table-bordered">
+                                   				<tr>
+                                   					<td>名称:</td>
+                                   					<td>{$server['name']} - 
+                                   						<if condition="$server['status'] eq 1"> <span style="color:green"><i class="icon-fire"></i>运行中</span>
+                                   							<else /> <span style="color:red"><i class="icon-fire"></i>已停运</span>
+                                   						</if>
+                                   					</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>唯一标识码:</td>
+                                   					<td>{$server['sign']}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>域名:</td>
+                                   					<td>{$server['domain']}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>IP地下载:</td>
+                                   					<td>{$server['ip']}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>加密方式:</td>
+                                   					<td>{$server['enctyption_mode']}</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>服务端口:</td>
+                                   					<td>
+                                   						<if condition="$status eq 1"> 购买后可见 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a> </if>
+									        			<if condition="$status eq 2">
+									        				<?php
+										        			$days = $month * 31;
+										        			$dueTime = strtotime($pay_time .' +'.$days.' days');
+										        			if($dueTime > time()){
+										        				?>
+										        				{$ss.port}
+										        				<?php
+										        			}else{
+										        				?>
+										        				已过期 
+										        				<if condition="$server['status'] eq 1">
+										        				- <a href="{:U('Order/payagint',array('id'=>$o['id']))}" target="payagint"><i class="icon-gift"></i>续费</a>
+										        				</if>
+										        				<?php
+										        			}
+									        				?>
+									        			</if>
+                                   					</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td>密码	:</td>
+                                   					<td>
+                                   						<if condition="$status eq 1"> 购买后可见 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a> </if>
+									        			<if condition="$status eq 2">
+									        				<?php
+										        			$days = $month * 31;
+										        			$dueTime = strtotime($pay_time .' +'.$days.' days');
+										        			if($dueTime > time()){
+										        				?>
+										        				{$ss.sspassword}
+										        				<?php
+										        			}else{
+										        				?>
+										        				已过期 
+										        				<if condition="$server['status'] eq 1">
+										        				- <a href="{:U('Order/payagint',array('id'=>$o['id']))}" target="payagint"><i class="icon-gift"></i>续费</a>
+										        				</if>
+										        				<?php
+										        			}
+									        				?>
+									        			</if>
+                                   					</td>
+                                   				</tr>
+                                   			</table>
+                                   		</div>
+                                   		<h4>我们希望把服务做到最好，但这需要你宝贵的意见！ 
+                                   			-> <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=jry2uLi8u7q2uc7--6Dt4eM" target="_blank">意见反馈</a>
+                                   			-> <a href="http://wpa.qq.com/msgrd?v=3&uin=286625487&site=qq&menu=yes" target="——blank">联系我们</a>
+                                   		</h4>
+                                   </div>
+                               </div>							
+                           </div>
+                    </div>
+                </div>
+
+		<tc_include file="Public:footer" />
+
+	</div>
+	<!-- /container -->
+
+	<tc_include file="Public:scripts" />
+</body>
+</html>

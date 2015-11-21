@@ -1,0 +1,59 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>服务器</a></li>
+			<li><a href="{:U('Indexadmin/add')}">添加服务器</a></li>
+		</ul>
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>服务器名称</th>
+					<th>唯一标识</th>
+					<th>IP</th>
+					<th>初始端口</th>
+					<th>指向域名</th>
+					<th>加密方式</th>
+					<th>购买地址</th>
+					<th>状态</th>
+					<th width="120">管理操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>$user_statuses=array("0"=>"禁用","1"=>"启用");</php>
+				<foreach name="users" item="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.sign}</td>
+					<td>{$vo.ip}</td>
+					<td>{$vo.startport}</td>
+					<td>{$vo.domain}</td>
+					<td>{$vo.enctyption_mode}</td>
+					<td>{$vo.buy_url}</td>
+					<td>
+					{$user_statuses[$vo['status']]}
+					<if condition="$vo['status'] eq 1 && 1 eq 2">
+					<a href='{:U("Indexadmin/serverdetail",array("id"=>$vo["id"]))}'>详情</a>
+					</if>
+					</td>
+					<td>
+						<a href='{:U("Indexadmin/edit",array("id"=>$vo["id"]))}'>修改</a> | 
+						<if condition="$vo['status'] eq 1">
+							<a href="{:U('Indexadmin/ban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要禁用此服务器吗？">禁用</a>
+						<else />
+							<a href="{:U('Indexadmin/cancelban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要启用此服务器吗？">启用</a>
+						</if> |
+						<a href='{:U("Indexadmin/delete",array("id"=>$vo["id"]))}' class="J_ajax_dialog_btn" data-msg="您确定要删除此服务器吗？">删除</a>
+					</td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

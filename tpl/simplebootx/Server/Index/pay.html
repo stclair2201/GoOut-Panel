@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$name} {$seo_title} {$site_name}</title>
+	<meta name="keywords" content="{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+</head>
+<body>
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+	<div class="row">
+		<div class="span12">
+			<div class="tc-box first-box article-box">
+				<h2>服务购买</h2>
+				<div class="article-infobox">
+		    		<span>还差一步，你就能拥有自己的代理服务了~</span>
+		    	</div>
+		    	<hr />
+		    	<h4>订单信息</h4>
+		    	<form method="post" action="{:U('Server/Index/pay_submit')}">
+		    	<table class="table table-striped table-bordered">
+		    		<tr>
+       					<td>订单号:</td>
+       					<td>{$order_id}</td>
+       				</tr>
+       				<tr>
+       					<td>用户名:</td>
+       					<td>{$User['user_login']}</td>
+       				</tr>
+       				<tr>
+       					<td>服务<?php echo $server_sell['sell_mode']=='A'?'流量':'时长'?>:</td>
+       					<td>
+       						<?php
+       							if($server_sell['sell_mode'] =="A"){
+       								if($server_sell['value']/1024>1){
+       									echo round(($server_sell['value']/1024),3)." GB";
+       									echo ',&nbsp;即：';
+       								}
+       								echo $server_sell['value']." MB";
+       							}else{
+       								if($server_sell['value']/30>1){
+       									if($server_sell['value']/30/12>1){
+       										echo round($server_sell['value']/30/12,3)." 年";
+       									}else{
+       										echo round($server_sell['value']/30,3)." 月";
+       									}
+       									echo ',&nbsp;即：';
+       								}
+       								echo $server_sell['value']." 天";
+       							}
+       							?>
+       					</td>
+       				</tr>
+       				<tr>
+       					<td>下单时间:</td>
+       					<td>{$create_time}</td>
+       				</tr>
+       				<tr>
+       					<td>价格:</td>
+       					<td>{$price} 元</td>
+       				</tr>
+       				<tr>
+       					<td>支付方式:</td>
+       					<td>
+       						<foreach name="payMethod" item="vo" key="k">
+       							<div class="span2">
+	       							<input type="radio" value="{$k}" name="paymethod" <if condition="$vo['isdefault'] eq true">checked="checked"</if> />
+		       						<img src="__TMPL__Public/images/paymethod/{$vo['img']}"/><br >
+		       						<span>{$vo['text']}</span>
+       							</div>
+       						</foreach>
+       						
+       				</tr>
+       				<tr>
+       					<td></td>
+       					<td>
+       						<div class="span2">
+       							<input type="hidden" name="order_id" value="{$order_id}" />
+       							<input type="hidden" name="table_id" value="{$id}" />
+       							<input class="btn btn-success" type="submit" value="立即支付" />
+       						</div>
+       					</td>
+       				</tr>
+		    	</table>
+		    	</form>
+		    	<h4>服务器信息 <a href="javascript:;" onclick="$('#serverinfo').toggle(1000);">Show/Hide</a></h4>
+		    	<table id="serverinfo" class="table table-striped table-bordered">
+       				<tr>
+       					<td>名称:</td>
+       					<td>{$server['name']} - 
+       						<if condition="$server['status'] eq 1"> <span style="color:green"><i class="icon-fire"></i>运行中</span>
+       							<else /> <span style="color:red"><i class="icon-fire"></i>已停运</span>
+       						</if>
+       					</td>
+       				</tr>
+       				<tr>
+       					<td>唯一标识码:</td>
+       					<td>{$server['sign']}</td>
+       				</tr>
+       				<tr>
+       					<td>域名:</td>
+       					<td>{$server['domain']}</td>
+       				</tr>
+       				<tr>
+       					<td>IP地下载:</td>
+       					<td>{$server['ip']}</td>
+       				</tr>
+       				<tr>
+       					<td>加密方式:</td>
+       					<td>{$server['enctyption_mode']}</td>
+       				</tr>
+       				<tr>
+       					<td>端口号:</td>
+       					<td>购买后可见</td>
+       				</tr>
+       				<tr>
+       					<td>密码:</td>
+       					<td>购买后可见</td>
+       				</tr>
+       			</table>
+			</div>
+		</div>
+		
+		
+
+	</div>
+<tc_include file="Public:footer" />
+</div>
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+</body>
+</html>

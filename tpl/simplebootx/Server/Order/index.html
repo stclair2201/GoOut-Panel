@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$site_name}</title>
+<meta name="keywords" content="{$site_seo_keywords}" />
+<meta name="description" content="{$site_seo_description}">
+<meta name="author" content="ThinkCMF">
+<tc_include file="Public:head" />
+</head>
+
+<body class="body-white" id="top">
+	<tc_include file="Public:nav" />
+
+		<div class="container tc-main">
+                <div class="row">
+                    <div class="span3">
+	                    <tc_include file="Public:usernav"/>
+                    </div>
+                    <div class="span9">
+                           <div class="tabs">
+                               <ul class="nav nav-tabs">
+                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list"></i> 我的订单</a></li>
+                               </ul>
+                               <div class="tab-content">
+                                   <div class="tab-pane active" id="one">
+                                   		<table class="table table-bordered table-striped table-hover">
+									    <thead>
+									      <tr>
+									        <th>序号</th>
+									        <th>订单号</th>
+									        <th>服务时长</th>
+									        <th>价格</th>
+									        <th>支付方式</th>
+									        <th>支付状态</th>
+									        <th>下单时间</th>
+									        <th>支付时间</th>
+									        <th>操作</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									    <foreach name="olist" item="o" key="k">
+									      <tr>
+									        <td>{++$k}</td>
+									        <td>{$o.order_id}</td>
+									        <td>{$o.month} 月</td>
+									        <td>{$o.price} 元</td>
+									        <td>{$o.paymode}</td>
+									        <td>
+									        	<if condition="$o['status'] eq 1">未支付</if>
+									        	<if condition="$o['status'] eq 2">已支付</if>
+									        </td>
+									        <td>{$o.create_time}</td>
+									        <td>
+									        	<if condition="$o['status'] eq 1"> - </if>
+									        	<if condition="$o['status'] eq 2">{$o['pay_time']}</if>
+									        </td>
+									        <td>
+									        	<a href="{:U('Order/detail',array('id'=>$o['id']))}" target="orderdetail">详细</a>  
+									        	<if condition="$o['status'] eq 1">
+									        		| <a href="{:U('Index/pay',array('id'=>$o['id']))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+									        		| <a class="J_ajax_dialog_btn" href="{:u('Order/delete',array('id'=>$o['id']))}" data-msg="您确定要删除订单吗？" data-ok="" data-cacel="取消">删除</a>
+									        	</if>
+									        	<if condition="$o['status'] eq 2">
+									        		<?php
+									        			$days = $o['month'] * 31; ////一个月按31天算，
+									        			$dueTime = strtotime($o['pay_time'] .' +'.$days.' days');
+									        			if($dueTime > time()){
+									        				?>
+									        				| <a href="{:U('Order/detail',array('id'=>$o['id']))}" target="orderdetail"><i class="icon-briefcase"></i>科学的去上网</a>
+									        				<?php
+									        			}else{
+									        				?>
+									        				| <a href="{:U('Order/payagint',array('id'=>$o['id']))}" target="payagint"><i class="icon-gift"></i>续费</a>
+									        				<?php
+									        			}
+									        			?>
+									        	</if>
+									        </td>
+									      </tr>
+									    </foreach>
+									    </tbody>
+									  </table>
+                                   </div>
+                               </div>							
+                           </div>
+                    </div>
+                </div>
+
+		<tc_include file="Public:footer" />
+
+	</div>
+	<!-- /container -->
+
+	<tc_include file="Public:scripts" />
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$name} {$seo_title} {$site_name}</title>
+	<meta name="keywords" content="{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+</head>
+<body>
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+	<div class="row">
+		<div class="span12">
+			<div class="tc-box first-box article-box">
+				<h2>六度成都  》 圣诞+元旦=“双蛋” 《  抽奖活动</h2>
+				<div class="article-infobox">
+		    		<b>活动规则</b>
+		    		<p>1.本活动仅限“六度成都”群成员参加。（如果你不是，报名也无所谓啦，反正我们不发奖品！）</p>
+		    		<p>2.本活动必须填写相关的信息（如果信息不完整也无所谓啦，反正我们不发奖品！）</p>
+		    		<p>3.中奖后请尽快联系群主（如果不联系也无所谓啦，反正我们不发奖品！）</p>
+		    		<p>4.本活动解释权归“六度成都”所有</p>
+		    		<hr>
+		    		<b>中奖说明</b>
+		    		<p>1.群成员每人仅有一次在获取抽奖码机会，该抽奖码为自定义与其他成员不重复的3位数。</p>
+		    		<p>2.以2015-12-30号的排列三开奖结果为标尺，通过计算得出中奖前5名。</p>
+		    		<p>3.计算规则：当期中奖号 - 抽奖号 的绝对值 ± 最优群等级步数 = 中奖差距（以绝对值计算）。中奖差距越小，排名越靠前。</p>
+		    		<p>4.群等级计算规则：</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;一度成员只能减少1步</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;二度成员只能减少1步，2步，结果最优自动选择</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;三度成员只能减少1步，2步，... ... 3*3=9步，结果最优自动选择</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;四度成员只能减少1步，2步，... ... 4*4=16步，结果最优自动选择</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;五度成员只能减少1步，2步，... ... 5*5=25步，结果最优自动选择</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;六度成员只能减少1步，2步，... ... 6*6=36步，结果最优自动选择</p>
+		    		<p>&nbsp;&nbsp;&nbsp;&nbsp;*-* 明显群等级太重要了，还可以减少</p>
+		    		<p>5.并列名次按抛开群等级靠后者优先。(*-* 再次强化群等级的重要性)</p>
+		    		<p>6.群等级以2015-12-29当天 14:00点截图为准，到时在群给允公告。</p>
+		    		<p>7.<a href="__TMPL__Liudu/images/exemp.png" target="_blank">示例</a></p>
+		    		<hr>
+		    		<b>特别说明</b>
+		    		<p>1.本次由 “依然单身的群管” 特别赞助</p>
+		    		<p>2.前五名奖品暂时保密</p>
+		    	</div>
+		    	<hr />
+		    	<h4>填写我的抽奖信息<a href="javascript:;" onclick="$('#serverinfo').toggle(1000);">Show/Hide</a></h4>
+		    	<div class="common-form">
+					<form id="serverinfo" method="post" class="form-horizontal J_ajaxForm" action="{:U('Index/add_post')}">
+							<div class="control-group">
+								<label class="control-label">群昵称:</label>
+								<div class="controls">
+									<input type="text" class="input" name="name" value="">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">群QQ号:</label>
+								<div class="controls">
+									<input type="text" class="input" name="qq" value="">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">自定义抽奖号:</label>
+								<div class="controls">
+									<input type="text" class="input" name="number" value="">
+								</div>
+							</div>
+						<div class="form-actions">
+							<button type="submit"
+								class="btn btn-primary btn_submit J_ajax_submit_btn">添加</button>
+							<a class="btn" href="javascript:;" onclick="$('#serverinfo').toggle(1000);">关闭</a>
+						</div>
+					</form>
+				</div>
+		    	<hr />
+		    	<h4>已经报名群成员</h4>
+		    	<table class="table table-striped table-bordered">
+		    		<tr>
+       					<td>编号</td>
+       					<td>昵称</td>
+       					<td>QQ</td>
+       					<td>抽奖号</td>
+       					<td>群等级</td>
+       					<td>填写时间</td>
+       				</tr>
+       				<foreach name="list" item="l" key="k">
+       				<tr>
+       					<td>{++$k}</td>
+       					<td>{$l['name']}</td>
+       					<td>
+       						<?php
+       							echo substr($l['qq'],0,3).'****'.substr($l['qq'],strlen($l['qq'])-3,3)
+       							?></td>
+       					<td>{$l['number']}</td>
+       					<td>六度</td>
+       					<td>{$l['create_time']}</td>
+       				</tr>	
+       				</foreach>
+		    	</table>
+			</div>
+		</div>
+		
+		
+
+	</div>
+<tc_include file="Public:footer" />
+</div>
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+</body>
+</html>

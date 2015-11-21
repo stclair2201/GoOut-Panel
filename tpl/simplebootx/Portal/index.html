@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>{$site_seo_title}-{$site_name}</title>
+		<meta name="keywords" content="{$site_seo_keywords}" />
+		<meta name="description" content="{$site_seo_description}">
+		<tc_include file="Public:head" />
+		<link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
+		<style>
+			.caption-wraper{position: absolute;left:50%;bottom:2em;}
+			.caption-wraper .caption{
+			position: relative;left:-50%;
+			background-color: rgba(0, 0, 0, 0.54);
+			padding: 0.4em 1em;
+			color:#fff;
+			-webkit-border-radius: 1.2em;
+			-moz-border-radius: 1.2em;
+			-ms-border-radius: 1.2em;
+			-o-border-radius: 1.2em;
+			border-radius: 1.2em;
+			}
+			@media (max-width: 767px){
+				.sy-box{margin: 12px -20px 0 -20px;}
+				.caption-wraper{left:0;bottom: 0.4em;}
+				.caption-wraper .caption{
+				left: 0;
+				padding: 0.2em 0.4em;
+				font-size: 0.92em;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+				-ms-border-radius: 0;
+				-o-border-radius: 0;
+				border-radius: 0;}
+			}
+		</style>
+	</head>
+<body class="body-white">
+<tc_include file="Public:nav" />
+
+<php>
+$home_slides=sp_getslide("portal_index");
+
+$home_slides=empty($home_slides)?$default_home_slides:$home_slides;
+</php>
+<ul id="homeslider" class="unstyled">
+	<foreach name="home_slides" item="vo">
+	<li>
+		<div class="caption-wraper">
+			<div class="caption">{$vo.slide_name}</div>
+		</div>
+		<a href="{$vo.slide_url}"><img src="{:sp_get_asset_upload_path($vo['slide_pic'])}" alt=""></a>
+	</li>
+	</foreach>
+</ul>
+<div class="container">
+	
+	<div>
+		<h1>快速了解Shadowsocks</h1>
+		<h3>Quickly understand the Shadowsocks</h3>
+	</div>
+	<div class="row">
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-bars"></i> 占用资源少</h2>
+             <p>对客户端内存与CPU的资源占用极低，在需要时才自动启用。</p>
+		</div>
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-group"></i> 网络自动分流</h2>
+             <p>国内外网站根据PAC规则自动分流；保证国内外网站访问的速度。</p>
+		</div>
+		<div class="span4">
+			  <h2 class="font-large nospace"><i class="fa fa-cloud"></i> 单独设置应用</h2>
+              <p>对支持Sock5代理的软件或者应用，可以单独设置代理，不影响其他应用。</p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-heart"></i> 安全性高、穿透性强</h2>
+             <p>使用socks5协议和可自定义密码的工业级算法加密，安全性高，性能优越。</p>
+		</div>
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-cubes"></i> 多平台、设备支持</h2>
+             <p>PC / 平板电脑 / Android手机 / iMac / iPhone / iPad等。</p>
+		</div>
+		<div class="span4">
+			  <h2 class="font-large nospace"><i class="fa fa-certificate"></i> 无需连接、永远在线</h2>
+              <p>ShadowSocks无需连接，不存在断线与连接不上的问题。</p>
+		</div>
+	</div>
+
+<hr>
+	<div>
+		<h1>欢迎选择我们</h1>
+		<h3>Welcome to choose us</h3>
+	</div>
+	<div class="row">
+	<table class="table table-bordered table-striped span12">
+              <thead>
+                <tr>
+                  <th>版本</th>
+                  <th>个人版</th>
+                  <th>专业版</th>
+                  <th>开源版</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>购买</td>
+                  <td><a class="btn btn-success" href="{:U('Server/Index/index',array('id'=>4))}">立即购买</a></td>
+                  <td><a class="btn btn-inverse">即将上线</a></td>
+                  <td><a class="btn btn-danger">联系我们</a></td>
+                </tr>
+                <tr>
+                  <td>帐号数量</td>
+                  <td>1</td>
+                  <td>3</td>
+				  <td>自定义</td>
+                </tr>
+                <tr>
+                  <td>服务器节点</td>
+                  <td>美国</td>
+                  <td>美国、日本</td>
+                  <td>自定义</td>
+                </tr>
+                <tr>
+                  <td>稳定性</td>
+                  <td>★★★★</td>
+                  <td>★★★★★</td>
+				  <td>★★★★★★</td>
+                </tr>
+				<tr>
+                  <td>流量限制</td>
+                  <td>20G/用户/月</td>
+                  <td>无限制</td>
+				  <td>无限制</td>
+                </tr>
+				<tr>
+                  <td>适用场景</td>
+                  <td>facebook/google等普通访问</td>
+                  <td>facebook/Youtube/google等普通访问和视频网站访问</td>
+				  <td>看自己购买服务器与使用人数</td>
+                </tr>
+				<tr>
+                  <td>售后服务</td>
+                  <td>在线客服服务</td>
+                  <td>在线客服、电话</td>
+				  <td>在线客服、电话、远程协助</td>
+                </tr>
+				<tr>
+                  <td>月付价格</td>
+                  <td>8元/月</td>
+                  <td>18元/月</td>
+				  <td>待定</td>
+                </tr>
+				<tr>
+                  <td>季付价格</td>
+                  <td>20元/季</td>
+                  <td>50元/季</td>
+				  <td>待定</td>
+                </tr>
+				<tr>
+                  <td>购买</td>
+                  <td><a class="btn btn-success" href="{:U('Server/Index/index',array('id'=>4))}">立即购买</a></td>
+                  <td><a class="btn btn-inverse">即将上线</a></td>
+                  <td><a class="btn btn-danger">联系我们</a></td>
+                </tr>
+              </tbody>
+            </table>
+	</div>
+	
+	<hr>
+	<div>
+		<h1>服务保障</h1>
+		<h3>Service guarantee</h3>
+	</div>
+	<div class="row">
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-flag"></i> 国际干线，畅通无阻</h2>
+             <p>国际高速干线，全球畅通</p>
+		</div>
+		<div class="span4">
+			 <h2 class="font-large nospace"><i class="fa fa-indent"></i> 多条线路，随意切换</h2>
+             <p>多条专线任意选择连接</p>
+		</div>
+		<div class="span4">
+			  <h2 class="font-large nospace"><i class="fa fa-cny"></i> 8元起，经济实惠</h2>
+              <p>物美价廉，低成本高效率</p>
+		</div>
+	</div>
+
+
+	<if condition="1 eq 2">
+	取消 最新资讯 2015-10-28
+	<div>
+		<h1 class="text-center">最新资讯</h1>
+		<h3 class="text-center">Last News</h3>
+	</div>
+	<php>
+		$lastnews=sp_sql_posts("cid:$portal_index_lastnews;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;"); 
+	</php>
+	<div class="row">
+		<foreach name="lastnews" item="vo">
+		<php>$smeta=json_decode($vo['smeta'],true);</php>
+		<div class="span3">
+			<div class="tc-gridbox">
+				<div class="header">
+					<div class="item-image">
+						<a href="{:leuu('article/index',array('id'=>$vo['tid']))}">
+							<if condition="empty($smeta['thumb'])"> 
+								<img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+							<else /> 
+								<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+							</if>
+						</a>
+					</div>
+					<h3><a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{$vo.post_title}</a></h3>
+					<hr>
+				</div>
+				<div class="body">
+					<p><a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{:msubstr($vo['post_excerpt'],0,32)}</a></p>
+				</div>
+			</div>
+		</div>
+		</foreach>
+	</div>
+	</if>
+<tc_include file="Public:footer"/>
+</div>
+
+<tc_include file="Public:scripts"/>
+<script src="__TMPL__Public/js/slippry.min.js"></script>
+<script>
+$(function() {
+	var demo1 = $("#homeslider").slippry({
+		transition: 'fade',
+		useCSS: true,
+		captions: false,
+		speed: 1000,
+		pause: 3000,
+		auto: true,
+		preload: 'visible'
+	});
+});
+</script>
+{:hook('footer_end')}
+</body>
+</html>

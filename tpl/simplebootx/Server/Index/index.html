@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$name} {$seo_title} {$site_name}</title>
+	<meta name="keywords" content="{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+</head>
+<body>
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+	<div class="row">
+		<div class="span12">
+			<div class="tc-box first-box article-box">
+				<h2>服务器购买: - '{$name}'</h2>
+				<div class="article-infobox">
+		    		<span>{$descriptions}</span>
+		    	</div>
+		    	<hr />
+		    	<form method="post" action="{:U('Server/index/order')}" target="orderpay">
+		    	<table class="table table-striped table-bordered table-hover">
+		    		<thead>
+		    			<tr>
+			    			<th>价格列表</th>
+		    			</tr>
+		    		</thead>
+		    		<foreach name="server_sell" item="sell">
+		    			<tr>
+		    				<td>
+		    					<label class="radio">
+		    					<input type="radio" name="timechange" value="{$sell.id}" />
+		    					<input type="hidden" name="modes" value="{$sell.sell_mode}" />
+		    					{$sell.value} <?php echo $sell['sell_mode'] == "A"?MB:天 ?>----{$sell.price} 元
+		    					</label>
+		    				</td>
+		    			</tr>
+		    		</foreach>
+		    	</table>
+		    	<hr />
+		    	<input type="hidden" name="server_id" value="{$id}" />
+		    	<input type="submit" class="btn btn-info" value="提交订单" />
+		    	</form>
+			</div>
+		</div>
+		<if condition="count($otherservers) gt 0">
+		<div class="span12">
+			<div class="tc-box first-box article-box">
+				<h2>其他服务器</h2>
+				<hr />
+				<div class="container-fluid">
+					<foreach name="otherservers" item="s" key="k" >
+						<div class="row span3"><a target="_blank" href="{:U('Server/index/index','id='.$s['id'])}">{$s.name}</a></div>
+					</foreach>
+				</div>
+			</div>
+		</div>
+		</if>
+	</div>
+	<tc_include file="Public:footer" />
+</div>
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+</body>
+</html>
