@@ -22,7 +22,9 @@ class OrderController extends MemberbaseController{
 	function index(){
 		$olist = $this -> order_model ->alias("o")
 		-> where(array("o.status != 0","o.user_id"=> $this -> uid)) /*-> field("o.*","s.name","s.sign") */-> select();
+		$pays = $this -> order_model -> payMethod;
 		$this -> assign("olist",$olist);
+		$this -> assign("pays",$pays);
 		$this -> display();
 		
 	}
@@ -32,10 +34,10 @@ class OrderController extends MemberbaseController{
 		if(!$orderId){
 			$this -> error("数据格式错误",U("Server/Order/index"));
 		}
-		
 		$order = $this -> order_model -> where(array(
 			'id' => $orderId,
-			'user_id' => $this -> uid
+			'user_id' => $this -> uid,
+			'status' => array('gt',0)
 		)) -> find();
 		
 		if(!$order){

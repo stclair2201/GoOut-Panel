@@ -44,7 +44,13 @@
 									        <td>{$o.order_id}</td>
 									        <td>{$o.month} 月</td>
 									        <td>{$o.price} 元</td>
-									        <td>{$o.paymode}</td>
+									        <td>
+									        	<?php
+									        		$p = $o["paymode"];
+									        		$p = $pays[$p];
+									        		echo $p["title"];
+									        	?>
+									        </td>
 									        <td>
 									        	<if condition="$o['status'] eq 1">未支付</if>
 									        	<if condition="$o['status'] eq 2">已支付</if>
@@ -57,7 +63,21 @@
 									        <td>
 									        	<a href="{:U('Order/detail',array('id'=>$o['id']))}" target="orderdetail">详细</a>  
 									        	<if condition="$o['status'] eq 1">
-									        		| <a href="{:U('Index/pay',array('id'=>$o['id']))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+									        		| 
+									        		<?php
+                           								if($o["paymode"] == "aliguarantee"){
+                           									$url = "https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=".$o["remark"];
+                           									if($o["guarantee_status"] == 'WAIT_BUYER_PAY'){
+                           										echo "<a href='".$url."' target='_blank'><i class='icon-gift'></i>去支付</a>";
+                           									}else if($o["guarantee_status"] == 'WAIT_BUYER_CONFIRM_GOODS'){
+                           										echo "<a href='".$url."' target='_blank'><i class='icon-gift'></i>确认收货</a>";
+                           									}
+                           								}else{
+                           									?>
+                           									<a href="{:U('Index/pay',array('id'=>$o['id']))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+                           									<?php
+                           								}
+                           							?>
 									        		| <a class="J_ajax_dialog_btn" href="{:u('Order/delete',array('id'=>$o['id']))}" data-msg="您确定要删除订单吗？" data-ok="" data-cacel="取消">删除</a>
 									        	</if>
 									        	<if condition="$o['status'] eq 2">

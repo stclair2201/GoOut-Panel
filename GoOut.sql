@@ -353,41 +353,7 @@ CREATE TABLE `go_links` (
 -- Records of go_links
 -- ----------------------------
 INSERT INTO `go_links` VALUES ('1', 'http://www.st2201.com', '十点一分网', '', '_blank', '', '1', '0', '', '0');
-
--- ----------------------------
--- Table structure for go_liudu_one
--- ----------------------------
-DROP TABLE IF EXISTS `go_liudu_one`;
-CREATE TABLE `go_liudu_one` (
-  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '表编号',
-  `name` varchar(255) NOT NULL,
-  `qq` varchar(20) NOT NULL DEFAULT '' COMMENT 'QQ号',
-  `number` int(3) NOT NULL DEFAULT '0' COMMENT '抽奖号',
-  `create_time` datetime NOT NULL,
-  `dengji` int(11) NOT NULL DEFAULT '0' COMMENT '群等级',
-  PRIMARY KEY (`id`),
-  KEY `ad_name` (`name`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of go_liudu_one
--- ----------------------------
-INSERT INTO `go_liudu_one` VALUES ('8', '黑桃K', '286625487', '456', '2015-11-16 22:56:44', '0');
-INSERT INTO `go_liudu_one` VALUES ('9', '李一 -大群管', '871537721', '958', '2015-11-16 23:21:17', '0');
-INSERT INTO `go_liudu_one` VALUES ('10', '帅气的空空', '991763019', '746', '2015-11-16 23:35:56', '0');
-INSERT INTO `go_liudu_one` VALUES ('11', '~~~~~~', '1457626996', '666', '2015-11-17 09:39:25', '0');
-INSERT INTO `go_liudu_one` VALUES ('12', '老王', '896785313', '579', '2015-11-17 09:46:39', '0');
-INSERT INTO `go_liudu_one` VALUES ('13', 'null', '1826953647', '876', '2015-11-17 11:29:06', '0');
-INSERT INTO `go_liudu_one` VALUES ('14', '六度成都', '441793914', '251', '2015-11-17 11:42:15', '0');
-INSERT INTO `go_liudu_one` VALUES ('15', '你已被管理员移出本群', '421506532', '520', '2015-11-17 12:08:44', '0');
-INSERT INTO `go_liudu_one` VALUES ('16', 'say、', '864897134', '152', '2015-11-17 12:25:50', '0');
-INSERT INTO `go_liudu_one` VALUES ('17', '发飙的兔子', '635536177', '512', '2015-11-17 12:27:33', '0');
-INSERT INTO `go_liudu_one` VALUES ('18', '邹建锋', '452317498', '911', '2015-11-17 12:29:35', '0');
-INSERT INTO `go_liudu_one` VALUES ('19', '瓶邪', '260060733', '733', '2015-11-17 12:39:39', '0');
-INSERT INTO `go_liudu_one` VALUES ('20', '屌丝男士', '2802499498', '333', '2015-11-17 14:21:02', '0');
-INSERT INTO `go_liudu_one` VALUES ('21', '薛~~~', '28196403', '532', '2015-11-17 15:15:46', '0');
-INSERT INTO `go_liudu_one` VALUES ('22', '逍遥岚轩', '19487298', '789', '2015-11-18 11:33:14', '0');
-INSERT INTO `go_liudu_one` VALUES ('23', '静若', '2827688437', '227', '2015-11-18 17:36:32', '0');
+INSERT INTO `go_links` VALUES ('1', 'http://www.goout.wang', 'GoOut.Wang', '', '_blank', '', '1', '0', '', '0');
 
 -- ----------------------------
 -- Table structure for go_menu
@@ -680,17 +646,13 @@ CREATE TABLE `go_order` (
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '0-删除,1-未支付，2-已支付',
   `pay_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '支付时间',
   `remark` tinytext NOT NULL COMMENT '支付返回后的关键参数，用于对帐处理',
-  `paymode` varchar(10) DEFAULT '' COMMENT '支付方式-支付宝，微信，',
+  `paymode` varchar(30) DEFAULT '' COMMENT '支付方式-支付宝，微信，',
   `create_time` datetime NOT NULL DEFAULT '2015-10-01 00:00:00' COMMENT '创建时间',
+  `guarantee_status` varchar(255) DEFAULT '' COMMENT '担保交易状态',
   PRIMARY KEY (`id`),
   KEY `user_login_key` (`order_id`) USING BTREE,
   KEY `user_nicename` (`server_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of go_order
--- ----------------------------
-INSERT INTO `go_order` VALUES ('45', '20151121B213933064328d', '4', '1', '18', '0.01', '1', '0000-00-00 00:00:00', '', '', '2015-11-21 01:08:50');
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for go_plugins
@@ -833,15 +795,6 @@ CREATE TABLE `go_servers` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of go_servers
--- ----------------------------
-INSERT INTO `go_servers` VALUES ('4', '支付测试服务器', 'ss.goout.wang', '104.224.149.180', 'aes-256-cfb', '5000', 'enterNum1', '搬瓦工1', '这是最好用的服务器了！', '2015-11-21 11:04:45', '1', '0');
-INSERT INTO `go_servers` VALUES ('5', '企业服务器（测试）', 'sss.goout.wang', '124.0.0.1', 'rc4-md5', '5000', 'ennn', '长城', '好用的没有话说', '2015-11-21 01:07:54', '0', '1');
-INSERT INTO `go_servers` VALUES ('6', '企业服务器（测试）', 'sss.goout.wang', '124.0.0.1', 'rc4-md5', '5000', 'ennn', '长城', '好用的没有话说', '2015-11-21 01:07:57', '0', '1');
-INSERT INTO `go_servers` VALUES ('7', '企业服务器（测试）', 'sss.goout.wang', '124.0.0.1', 'rc4-md5', '5000', 'ennn', '长城', '好用的没有话说', '2015-11-20 22:51:21', '0', '1');
-INSERT INTO `go_servers` VALUES ('8', '企业服务器（测试）', 'sss.goout.wang', '124.0.0.1', 'rc4-md5', '5000', 'ennn', '长城', '好用的没有话说', '2015-11-20 22:51:17', '0', '1');
-
--- ----------------------------
 -- Table structure for go_servers_sell
 -- ----------------------------
 DROP TABLE IF EXISTS `go_servers_sell`;
@@ -853,19 +806,7 @@ CREATE TABLE `go_servers_sell` (
   `price` double(4,2) NOT NULL DEFAULT '0.00' COMMENT '该值需要的价格',
   PRIMARY KEY (`id`),
   KEY `user_login_key` (`server_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of go_servers_sell
--- ----------------------------
-INSERT INTO `go_servers_sell` VALUES ('13', '5', 'A', '1', '1.00');
-INSERT INTO `go_servers_sell` VALUES ('14', '5', 'A', '10', '10.00');
-INSERT INTO `go_servers_sell` VALUES ('15', '5', 'B', '1', '1.00');
-INSERT INTO `go_servers_sell` VALUES ('16', '5', 'B', '2', '2.00');
-INSERT INTO `go_servers_sell` VALUES ('17', '4', 'A', '1024', '4.00');
-INSERT INTO `go_servers_sell` VALUES ('18', '4', 'B', '30', '8.00');
-INSERT INTO `go_servers_sell` VALUES ('19', '4', 'A', '2048', '8.00');
-INSERT INTO `go_servers_sell` VALUES ('20', '4', 'B', '62', '16.00');
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for go_slide
@@ -927,13 +868,7 @@ CREATE TABLE `go_ss` (
   `enable` tinyint(4) NOT NULL DEFAULT '1' COMMENT '服务开关，0 不可用，1可用,-1超过流量，-2超过日期',
   `type` varchar(1) NOT NULL DEFAULT 'A' COMMENT 'A-流量套餐，B-包时间套餐',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of go_ss
--- ----------------------------
-INSERT INTO `go_ss` VALUES ('16', '1', '20151110B102036682362d', '5e66d6', '1448103074', '1117667', '6293439', '1111111111111', '1647920400', '50000', 'enterNum1', '1', '1', 'B');
-INSERT INTO `go_ss` VALUES ('17', '1', '20151110B102036682363d', '22012', '1448103074', '46572', '0', '1111111111111', '1647920400', '50001', 'enterNum1', '1', '1', 'B');
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for go_terms
@@ -1013,7 +948,7 @@ CREATE TABLE `go_users` (
 -- ----------------------------
 -- Records of go_users
 -- ----------------------------
-INSERT INTO `go_users` VALUES ('1', 'admin', '77810525c78581dc9bdb52d04dc20036dbd8313ed055807b', 'GoOut', 'changjiang1988.hi@163.com', 'http://www.goout.wang', null, '0', '0000-00-00', '', '221.237.118.82', '2015-11-21 10:23:25', '2015-10-28 02:23:56', '', '1', '0', '1');
+INSERT INTO `go_users` VALUES ('1', 'admin', '77810525c78581dc9bdb52d04dc20036dbd8313ed055807b', 'GoOut', 'changjiang1988.hi@163.com', 'http://www.goout.wang', null, '0', '0000-00-00', '', '127.0.0.1', '2015-11-21 10:23:25', '2015-10-28 02:23:56', '', '1', '0', '1');
 
 -- ----------------------------
 -- Table structure for go_user_favorites
@@ -1031,22 +966,3 @@ CREATE TABLE `go_user_favorites` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of go_user_favorites
--- ----------------------------
-
--- ----------------------------
--- Procedure structure for test_multi_sets
--- ----------------------------
-DROP PROCEDURE IF EXISTS `test_multi_sets`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `test_multi_sets`()
-    DETERMINISTIC
-begin
-        select user() as first_col;
-        select user() as first_col, now() as second_col;
-        select user() as first_col, now() as second_col, now() as third_col;
-        end
-;;
-DELIMITER ;

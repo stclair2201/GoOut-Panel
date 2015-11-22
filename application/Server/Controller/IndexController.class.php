@@ -160,6 +160,11 @@ class IndexController extends HomeBaseController{
 			$pp -> ordername = "购买-".$server['name'].'代理服务';
 			echo $pp-> pp_get_code($payInfo);
 			die;
+		}elseif($paymethod == 'aliguarantee'){
+			$aliguarantee = new \aliguarantee();
+			$aliguarantee -> ordername = "购买-".$server['name'].'服务';
+			echo $aliguarantee -> get_code($payInfo);
+			die;
 		}
 		
 	}
@@ -181,7 +186,48 @@ class IndexController extends HomeBaseController{
 			$this->redirect("Server/Order/index");
 		}
 	}
-
+	
+	/****
+	 * aliguarantee 支付回调接口
+	 * 1.验证支付情况-主动发起验证
+	 * 2.处理订单
+	 * ***/
+	public function aliguaranteebackn(){
+		include PAYMETHOD_ROOT.$this -> order_model -> payMethod['aliguarantee']['class_url'];
+		$aliguarantee = new \aliguarantee();
+		$result = $aliguarantee -> alipay_notify($_POST);
+		$payInfo = $this -> order_model-> where(array("order_id"=>$_POST['out_trade_no'])) -> find();
+		if($result =="error"){
+			echo "fail";
+			die;
+		}else if($result == 'WAIT_BUYER_PAY') {
+		}else if($result == 'WAIT_SELLER_SEND_GOODS') {
+			/****
+			 * 调用支付宝发货接口
+			 * **/
+			 $aliguarantee -> send($_POST);
+		}else if($result == 'WAIT_BUYER_CONFIRM_GOODS') {
+			/****
+			 * 等待买家确认收货
+			 * ****/
+		}else if($result == 'TRADE_FINISHED') {
+			/****
+			 * 交易成功，进行业务处理
+			 * ***/
+			$this -> doPay($payInfo['id'],"aliguarantee",json_encode($_POST));
+		}else if($result == "TRADE_CLOSED"){
+			/****
+			 * 交易失败，关闭本地订单
+			 * ***/
+			$payInfoNew['status'] = "0";
+		}
+		$payInfoNew['remark'] = $_POST['trade_no'];
+		$payInfoNew['guarantee_status'] = $result;
+		$payInfoNew['paymode'] = "aliguarantee";
+		$this -> order_model-> where(array("order_id"=>$_POST['out_trade_no'])) -> save($payInfoNew);
+		echo "success";
+		die;
+	}
 	
 	/****
 	 * 处理用户支付后的方式

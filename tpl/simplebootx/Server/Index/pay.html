@@ -66,7 +66,7 @@
        						<foreach name="payMethod" item="vo" key="k">
        							<div class="span2">
 	       							<input type="radio" value="{$k}" name="paymethod" <if condition="$vo['isdefault'] eq true">checked="checked"</if> />
-		       						<img src="__TMPL__Public/images/paymethod/{$vo['img']}"/><br >
+		       						<img style="width: 139px;height: 34px;" src="__TMPL__Server/images/paymethod/{$vo['img']}"/><br >
 		       						<span>{$vo['text']}</span>
        							</div>
        						</foreach>

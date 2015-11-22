@@ -66,8 +66,27 @@
                                    					<td>订单状态:</td>
                                    					<td>
                                    						<if condition="$status eq 1">
+                                   							<?php
+                                   								if($paymode == "aliguarantee"){
+                                   									if($guarantee_status == 'WAIT_BUYER_PAY'){
+                                   										?>
+                                   							未支付
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>去支付</a>
+                                   										<?php
+                                   									}else if($guarantee_status == 'WAIT_SELLER_SEND_GOODS'){
+                                   									}else if($guarantee_status == 'WAIT_BUYER_CONFIRM_GOODS'){
+                                   										?>
+                                   							请到支付中确认收货，收货后则自动发货
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>确认收货</a>
+                                   										<?php
+                                   									}
+                                   								}else{
+                                   									?>
                                    							未支付
                                    							 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+                                   									<?php
+                                   								}
+                                   							?>
                                    						</if>
 									        			<if condition="$status eq 2">已支付</if>
                                    					</td>
@@ -79,6 +98,20 @@
 									        			<if condition="$status eq 2">{$pay_time}</if>
                                    					</td>
                                    				</tr>
+                                   				<if condition="$status eq 2">
+                                   					<tr>
+	                                   					<td>服务状态:</td>
+	                                   					<td>
+	                                   						<if condition="($ss['switch'] eq 1) and ($ss['enable'] eq 1)">
+	                                   							<span style="color:green"><i class="icon-fire"></i>服务可用</span>
+	                                   						<else /> 
+	                                   							<span style="color:red"><i class="icon-fire"></i>流量已用完或服务到期</span>
+	                                   						</if>
+	                                   					</td>
+	                                   				</tr>
+                                   				</if>
+                                   				
+                                   				
                                    			</table>
                                    		</div>
                                    		
@@ -112,7 +145,29 @@
                                    				<tr>
                                    					<td>服务端口:</td>
                                    					<td>
-                                   						<if condition="$status eq 1"> 购买后可见 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a> </if>
+                                   						<if condition="$status eq 1">
+                                   							<?php
+                                   								if($paymode == "aliguarantee"){
+                                   									if($guarantee_status == 'WAIT_BUYER_PAY'){
+                                   										?>
+                                   							未支付
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>去支付</a>
+                                   										<?php
+                                   									}else if($guarantee_status == 'WAIT_SELLER_SEND_GOODS'){
+                                   									}else if($guarantee_status == 'WAIT_BUYER_CONFIRM_GOODS'){
+                                   										?>
+                                   							请到支付中确认收货，收货后则自动发货
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>确认收货</a>
+                                   										<?php
+                                   									}
+                                   								}else{
+                                   									?>
+                                   							购买后可见
+                                   							 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+                                   									<?php
+                                   								}
+                                   								?>
+                                   						</if>
 									        			<if condition="$status eq 2">
 									        				<?php
 										        			$days = $month * 31;
@@ -136,7 +191,29 @@
                                    				<tr>
                                    					<td>密码	:</td>
                                    					<td>
-                                   						<if condition="$status eq 1"> 购买后可见 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a> </if>
+                                   						<if condition="$status eq 1"> 
+                                   							<?php
+                                   								if($paymode == "aliguarantee"){
+                                   									if($guarantee_status == 'WAIT_BUYER_PAY'){
+                                   										?>
+                                   							未支付
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>去支付</a>
+                                   										<?php
+                                   									}else if($guarantee_status == 'WAIT_SELLER_SEND_GOODS'){
+                                   									}else if($guarantee_status == 'WAIT_BUYER_CONFIRM_GOODS'){
+                                   										?>
+                                   							请到支付中确认收货，收货后则自动发货
+                                   							 - <a href="https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo=<?php echo $remark;?>" target="_blank"><i class="icon-gift"></i>确认收货</a>
+                                   										<?php
+                                   									}
+                                   								}else{
+                                   									?>
+                                   							购买后可见
+                                   							 - <a href="{:U('Index/pay',array('id'=>$id))}" target="orderpay"><i class="icon-gift"></i>去支付</a>
+                                   									<?php
+                                   								}
+                                   								?>
+                                   						</if>
 									        			<if condition="$status eq 2">
 									        				<?php
 										        			$days = $month * 31;

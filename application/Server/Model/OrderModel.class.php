@@ -5,12 +5,22 @@ class OrderModel extends CommonModel
 {
 	
 	public  $payMethod = array(
+		'aliguarantee' => array(
+			'title' => '支付宝担保',
+			'img' => 'aliguarantee.png',
+			'account' => '',
+			'key'=>'',
+			'text'=>'支付宝担保交易,就像是在淘宝购物一样',
+			'isdefault'=>true,
+			'class_url'=> 'alipay/guarantee/guarantee.php'
+		),
 		'paypal' => array(
+			'title' => 'Paypal支付',
 			'img' => 'paypal.png',
 			'account' => '',
 			'key' => '',
 			'text' => '全球众多用户使用的国际贸易支付工具',
-			'isdefault'=> true,
+			'isdefault'=> false,
 			'class_url' => 'paypal/paypal.php'
 		)
 	);

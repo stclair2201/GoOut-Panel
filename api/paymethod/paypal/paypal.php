@@ -2,7 +2,7 @@
 
 class pp{
 	///sandbox,live
-	private $ppmode = "sandbox";
+	private $ppmode = "live";
 	
 	private $url_live_account = "changjiang1988.hi@163.com";
 	private $url_sandbox_account = "changjiang1988.hi-facilitator@163.com";
@@ -17,10 +17,10 @@ class pp{
 	$data_order_id      = $order['order_id'];
 	$data_amount        = $order['price'];
 	$return_url 		= U("Server/Index/paypalback",array("id"=>$order['id']),true,true);
-	$data_return_url    =   $return_url;// return_url(basename(__FILE__, '.php'));
+	$data_return_url    =   $return_url;
 	$currency_code      = 'USD';
-	$data_notify_url    = $return_url;// return_url(basename(__FILE__, '.php'));
-	$cancel_return      = $return_url;//$GLOBALS['ecs']->url();
+	$data_notify_url    = $return_url;
+	$cancel_return      = $return_url;
 	$action_url			= "url_".$this -> ppmode."_code_url";
 	$action_url			= $this->$action_url;
 	$account			= 'url_'.$this -> ppmode."_account";
